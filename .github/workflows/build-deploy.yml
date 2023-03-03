@@ -1,7 +1,15 @@
 name: Trigger auto deployment
 on:
   # 手動実行用トリガー
-  workflow_dispatch:      
+  workflow_dispatch:
+  
+  # Add a trigger
+  # 自動実行用トリガー
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
 # Add env
 env:
   CONTAINER_REGISTRY: ryumanmf37qiiyxpvb4.azurecr.io # Azure Container Registry のドメイン (~.azurecr.io) をこちらに設定
