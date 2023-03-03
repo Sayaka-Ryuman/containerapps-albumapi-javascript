@@ -1,0 +1,21 @@
+name: Trigger auto deployment
+on:
+  # 手動実行用トリガー
+  workflow_dispatch:      
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Set repository name to env
+        run: | 
+          echo "REPOSITORY_NAME=${GITHUB_REPOSITORY#${GITHUB_REPOSITORY_OWNER}/}" >> $GITHUB_ENV
+
+      - name: Confirm if env have REPOSITORY_NAME
+        run: |
+          echo ${{ env.REPOSITORY_NAME }}
