@@ -10,6 +10,7 @@ on:
       [ main ]
     paths:
     - '**'
+    - '!README.md'
 # Add env
 env:
   CONTAINER_REGISTRY: ryumanmf37qiiyxpvb4.azurecr.io # Azure Container Registry のドメイン (~.azurecr.io) をこちらに設定
