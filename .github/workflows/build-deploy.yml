@@ -2,6 +2,9 @@ name: Trigger auto deployment
 on:
   # 手動実行用トリガー
   workflow_dispatch:      
+# Add env
+env:
+  CONTAINER_REGISTRY: ryumanmf37qiiyxpvb4.azurecr.io # Azure Container Registry のドメイン (~.azurecr.io) をこちらに設定
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -19,3 +22,11 @@ jobs:
       - name: Confirm if env have REPOSITORY_NAME
         run: |
           echo ${{ env.REPOSITORY_NAME }}
+# Add a step
+      - name: Log in to container registry
+        # 認証処理を行うためのアクション
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.CONTAINER_REGISTRY }}
+          username: ${{ secrets.CONTAINER_REGISTRY_USERNAME }}
+          password: ${{ secrets.CONTAINER_REGISTRY_PASSWORD }}
